@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--配置service对象-->
+    <!--<bean id="accountService" class="service.impl.AccountServiceImpl">
+        &lt;!&ndash;注入Dao,记住要配置属性一定要有set方法！！！！！&ndash;&gt;
+        <property name="accountDao" ref="accountDao"/>
+    </bean>-->
+
+<!--配置Dao对象-->
+    <bean id="accountDao" class="Dao.impl.AccountDaoImpl">
+<!--        注入QueryRunner-->
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+
+    </bean>
+
+    <!--配置QueryRunner，多例对象，可能存在多个连接
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        &lt;!&ndash;注入数据源&ndash;&gt;
+        <constructor-arg name="ds" ref="dateSource"></constructor-arg>
+    </bean>-->
+
+
+    <!--配置数据源（数据库）-->
+
+
+    <!--Spring 提供操作数据库的类-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">  <!-- 这里的class配置为数据源的类型，这里的basicDataSource是apache的数据源，根据你自己的需求可以修改为其他的，没有特殊要求可以不改 -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  <!-- 数据库的驱动名，这个根据你用的数据库类型自己百度 -->
+        <property name="url" value="jdbc:mysql://localhost:3306/account?useUnicode=true&amp;characterEncoding=utf-8" />  <!-- 数据库的连接地址，注意格式不同数据库格式略有不同，自行百度 -->
+        <property name="username" value="root" />  <!-- 数据库的用户名 -->
+        <property name="password" value="yzy665128" />  <!-- 数据库的密码 -->
+    </bean>
+
+
+
+
+
+
+</beans>

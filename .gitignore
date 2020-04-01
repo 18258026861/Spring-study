@@ -1,0 +1,5 @@
+# Project exclude paths
+/spring-AOP/target/
+/spring注解/kuang/target/
+/spring注解/target/
+/target/
